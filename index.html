@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Runt Por Placa - Vehicle Information by License Plate</title>
+    <meta name="description" content="Runt Por Placa allows you to check official vehicle information in Colombia with the vehicle license plate number. Access details like registration, ownership, technical inspection, and SOAT compliance.">
+    <meta name="author" content="Runt Por Placa">
+    <meta property="og:description" content="Runt Por Placa offers an easy and reliable way to check vehicle information in Colombia. Enter a license plate number to verify details like ownership, registration, and compliance.">
+    <meta property="og:title" content="Runt Por Placa - Official Vehicle Information">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://runt-por-placa.com.co/">
+    <meta property="og:site_name" content="Runt Por Placa">
+    <meta name="keywords" content="Runt Por Placa, vehicle information, Colombia, license plate, vehicle records, vehicle registration, SOAT, technical inspection, legal compliance, vehicle ownership">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff4e50;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            padding: 30px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .logo i {
+            margin-right: 8px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 35px;
+        }
+
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 150px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(106, 17, 203, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+            animation: fadeInUp 1s ease;
+            
+        }
+
+        .hero-text h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .hero-text .highlight {
+            background: linear-gradient(45deg, var(--accent), #ffa94d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--gray);
+            max-width: 650px;
+        
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            filter: blur(80px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: pulse 8s infinite;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 16px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: var(--transition);
+            box-shadow: 0 10px 25px rgba(37, 117, 252, 0.4);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(37, 117, 252, 0.5);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .cta-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            opacity: 0;
+            transition: var(--transition);
+            z-index: -1;
+        }
+
+        .cta-button:hover::after {
+            opacity: 1;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title .highlight {
+            background: linear-gradient(45deg, var(--accent), #ffa94d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: rgba(30, 41, 59, 0.6);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(51, 65, 85, 0.7);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Content Section */
+        .content-section {
+            padding: 100px 0;
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .content-image {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: -30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+        }
+
+        .content-image:hover {
+            transform: scale(1.02);
+        }
+
+        .content-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .content-text {
+            flex: 1;
+        }
+
+        .content-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .content-text .highlight {
+            background: linear-gradient(45deg, var(--accent), #ffa94d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .content-text p {
+            margin-bottom: 20px;
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="https://runt-por-placa.com.co/" class="logo"><i class="fas fa-search"></i>Runt Por Placa</a>
+                <nav>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#content">How it Works</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#download">Access Now</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="top-margin">Runt Por Placa - Vehicle Information</h1>
+                    <p>Runt por Placa offers an easy way to check vehicle information in Colombia using just the license plate number. Verify details like ownership, registration, SOAT compliance, and more.</p>
+                    <a href="https://runt-por-placa.com.co/" class="cta-button">Get Vehicle Information</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEbVtVsTVkSmuts751NE6jULkNGg7SbA9_-A&s" alt="Runt Por Placa">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Top Features of <span class="highlight">Runt Por Placa</span></h2>
+                <p>Instant access to official vehicle data in Colombia. Check registration, ownership, and compliance details quickly.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-car"></i></div>
+                    <h3>Vehicle Registration Status</h3>
+                    <p>Confirm whether a vehicle is properly registered with the national transit system.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user"></i></div>
+                    <h3>Ownership Verification</h3>
+                    <p>Verify the current and past owners of a vehicle for transparency and security.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                    <h3>SOAT Compliance</h3>
+                    <p>Ensure that the vehicle complies with mandatory insurance regulations (SOAT).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section" id="content">
+        <div class="container">
+            <div class="content-wrapper">
+                <div class="content-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1_SE0gJoEldpYUo78NgHsNRzwQ3JM_UKIQg&s" alt="Runt Por Placa Process">
+                </div>
+                <div class="content-text">
+                    <h2>How Runt Por Placa Works</h2>
+                    <p>Simply enter a vehicle's license plate number to retrieve detailed, official information about the vehicle's registration status, ownership, compliance with laws, and more. This service is designed to save you time and provide you with reliable data. The platform directly connects to the National Single Transit Registry system of Colombia, which stores essential vehicle information to ensure transparency and prevent fraud.</p>
+                    <p>The platform's interface is easy to use, designed to allow users to obtain the most accurate and up-to-date information regarding any vehicle in Colombia. With Runt Por Placa, users no longer need to visit government offices or waste time in long queues; everything is available online in a matter of minutes. </p>
+                    <p>Whether you're looking to purchase a used vehicle, check for outstanding fines, or simply want to verify a vehicle's legal status, Runt Por Placa provides all the necessary information in a simple and accessible way. This tool helps drivers, car buyers, and law enforcement officers alike. Its importance cannot be overstated in ensuring safety, preventing fraud, and confirming legal compliance.</p>
+                    <p>With Runt Por Placa, you can check details like:</p>
+                    <ul>
+                        <li>Vehicle registration status</li>
+                        <li>Ownership records</li>
+                        <li>SOAT compliance (mandatory vehicle insurance)</li>
+                        <li>Technical inspection details</li>
+                        <li>Vehicle identification data (VIN, make, model, etc.)</li>
+                    </ul>
+                    <p>Runt Por Placa ensures that you make informed decisions based on complete, verified information. It's not just a tool, but a vital service for the well-being of drivers and citizens in Colombia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="download-content">
+                <h2>How to <span class="highlight">Access Vehicle Information</span></h2>
+                <p>Visit the official Runt Por Placa platform, enter the vehicle license plate, and instantly access detailed information about the vehicle. This service is fast, reliable, and accessible from anywhere in Colombia.</p>
+                <a href="https://runt-por-placa.com.co/" class="cta-button">Access Now</a>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
